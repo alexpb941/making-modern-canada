@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>The Making of Modern Canada</title>
+
+  <style>
+    :root {
+      --navy: #10283d;
+      --dark-navy: #091a29;
+      --cream: #f5efe3;
+      --paper: #fffaf1;
+      --red: #9c3d3d;
+      --gold: #d4a84f;
+      --teal: #407f7a;
+      --text: #263442;
+      --muted: #64717d;
+      --border: rgba(16, 40, 61, 0.15);
+      --shadow: 0 18px 45px rgba(9, 26, 41, 0.13);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--cream);
+      line-height: 1.6;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin-top: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.08;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    /* Navigation */
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 14px 6%;
+      background: rgba(9, 26, 41, 0.96);
+      color: white;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.03em;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .nav-links a {
+      padding: 8px 10px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .nav-links a:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: white;
+    }
+
+    /* Hero */
+
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      align-items: center;
+      padding: 90px 7%;
+      color: white;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(9, 26, 41, 0.97) 0%,
+          rgba(16, 40, 61, 0.85) 52%,
+          rgba(9, 26, 41, 0.35) 100%
+        ),
+        url("https://images.unsplash.com/photo-1519178614-68673b201f36?auto=format&fit=crop&w=1800&q=85")
+        center / cover;
+    }
+
+    .hero-content {
+      max-width: 850px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 13px;
+      margin-bottom: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      border-radius: 999px;
+      color: var(--gold);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.8rem;
+    }
+
+    .hero h1 {
+      max-width: 900px;
+      margin-bottom: 18px;
+      font-size: clamp(3.3rem, 8vw, 7rem);
+      letter-spacing: -0.05em;
+    }
+
+    .hero-subtitle {
+      max-width: 760px;
+      margin-bottom: 30px;
+      color: rgba(255, 255, 255, 0.87);
+      font-size: 1.18rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 13px 19px;
+      border-radius: 999px;
+      background: var(--gold);
+      color: var(--dark-navy);
+      text-decoration: none;
+      font-weight: 900;
+    }
+
+    .button.secondary {
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.09);
+      color: white;
+    }
+
+    /* General sections */
+
+    section {
+      padding: 80px 7%;
+    }
+
+    .section-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 36px;
+      align-items: end;
+      margin-bottom: 36px;
+    }
+
+    .kicker {
+      margin-bottom: 9px;
+      color: var(--red);
+      font-size: 0.8rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 0;
+      color: var(--navy);
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-intro {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .card {
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: rgba(255, 250, 241, 0.9);
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      color: var(--navy);
+      font-size: 1.45rem;
+    }
+
+    .grid-two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .grid-three {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    /* Overview */
+
+    .overview {
+      background:
+        radial-gradient(circle at 90% 10%, rgba(212, 168, 79, 0.2), transparent 28%),
+        var(--cream);
+    }
+
+    .essential-question {
+      padding: 34px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, var(--navy), #284562);
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .essential-question p {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.7rem, 3vw, 2.6rem);
+      font-weight: bold;
+      line-height: 1.25;
+    }
+
+    .snapshot {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 25px;
+    }
+
+    .snapshot-card {
+      padding: 18px;
+      border-radius: 18px;
+      background: white;
+      border: 1px solid var(--border);
+    }
+
+    .snapshot-label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--red);
+      font-size: 0.75rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    /* Design rationale */
+
+    .design {
+      background: var(--paper);
+    }
+
+    .icon {
+      width: 50px;
+      height: 50px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      border-radius: 16px;
+      background: var(--navy);
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    /* Learning goals */
+
+    .goals-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .goals-list li {
+      position: relative;
+      padding: 14px 16px 14px 46px;
+      border-radius: 15px;
+      background: rgba(16, 40, 61, 0.06);
+    }
+
+    .goals-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 15px;
+      top: 13px;
+      display: grid;
+      place-items: center;
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      background: var(--teal);
+      color: white;
+      font-weight: bold;
+    }
+
+    .thinking-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .thinking-tags span {
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: rgba(156, 61, 61, 0.11);
+      color: var(--red);
+      font-weight: 800;
+    }
+
+    /* Galleries */
+
+    .galleries {
+      background: var(--dark-navy);
+      color: white;
+    }
+
+    .galleries .section-heading h2 {
+      color: white;
+    }
+
+    .galleries .section-intro {
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(230px, 1fr));
+      gap: 18px;
+      overflow-x: auto;
+      padding-bottom: 14px;
+    }
+
+    .gallery {
+      min-height: 455px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 23px;
+      border-radius: 24px;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
+    }
+
+    .gallery:nth-child(1) {
+      background: linear-gradient(145deg, #273e59, #8f403d);
+    }
+
+    .gallery:nth-child(2) {
+      background: linear-gradient(145deg, #1b3045, #56697d);
+    }
+
+    .gallery:nth-child(3) {
+      background: linear-gradient(145deg, #663f32, #b78332);
+    }
+
+    .gallery:nth-child(4) {
+      background: linear-gradient(145deg, #1c3a4a, #3c817b);
+    }
+
+    .gallery:nth-child(5) {
+      background: linear-gradient(145deg, #392650, #8f3f56);
+    }
+
+    .gallery-label {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.77rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+    }
+
+    .gallery h3 {
+      margin: 12px 0 8px;
+      color: white;
+      font-size: 1.8rem;
+    }
+
+    .gallery-years {
+      color: var(--gold);
+      font-weight: 900;
+    }
+
+    .gallery ul {
+      padding-left: 18px;
+      margin-bottom: 0;
+    }
+
+    /* Museum project */
+
+    .museum-project {
+      background:
+        linear-gradient(rgba(245, 239, 227, 0.94), rgba(245, 239, 227, 0.94)),
+        url("https://images.unsplash.com/photo-1561214115-f2f134cc4912?auto=format&fit=crop&w=1800&q=80")
+        center / cover;
+    }
+
+    .project-process {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .process-step {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 13px;
+      align-items: start;
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(16, 40, 61, 0.06);
+    }
+
+    .process-number {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--red);
+      color: white;
+      font-weight: 900;
+    }
+
+    .artifact-box {
+      min-height: 420px;
+      padding: 25px;
+      border-radius: 28px;
+      background: linear-gradient(145deg, var(--navy), #2b4c67);
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .artifact-frame {
+      height: 220px;
+      margin-bottom: 19px;
+      border: 9px solid rgba(255, 255, 255, 0.13);
+      border-radius: 18px;
+      background:
+        linear-gradient(rgba(16, 40, 61, 0.2), rgba(16, 40, 61, 0.2)),
+        url("https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=1200&q=80")
+        center / cover;
+    }
+
+    .artifact-box h3 {
+      color: white;
+    }
+
+    /* Assessment */
+
+    .assessment {
+      background: var(--paper);
+    }
+
+    .assessment-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .assessment-step {
+      min-height: 135px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 17px;
+      border-radius: 18px;
+      background: var(--navy);
+      color: white;
+    }
+
+    .assessment-step:nth-child(2),
+    .assessment-step:nth-child(5) {
+      background: var(--red);
+    }
+
+    .assessment-step:nth-child(3) {
+      background: var(--teal);
+    }
+
+    .assessment-step:nth-child(4) {
+      background: #876b35;
+    }
+
+    .assessment-icon {
+      font-size: 1.8rem;
+    }
+
+    .pathway {
+      border-top: 5px solid var(--red);
+    }
+
+    .pathway.academic {
+      border-top-color: var(--teal);
+    }
+
+    .essay-question {
+      margin-top: 16px;
+      padding: 16px;
+      border-left: 5px solid var(--gold);
+      border-radius: 12px;
+      background: rgba(212, 168, 79, 0.15);
+      font-weight: 700;
+    }
+
+    /* Technology */
+
+    .technology {
+      background: var(--cream);
+    }
+
+    .technology-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .technology-card {
+      padding: 22px;
+      border-radius: 20px;
+      background: white;
+      border: 1px solid var(--border);
+      box-shadow: 0 11px 28px rgba(9, 26, 41, 0.08);
+    }
+
+    .technology-card span {
+      display: block;
+      margin-bottom: 9px;
+      font-size: 1.8rem;
+    }
+
+    /* Resources */
+
+    .resources {
+      background: var(--paper);
+    }
+
+    .resource-card a {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--red);
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    /* References */
+
+    .references {
+      background: var(--dark-navy);
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    .references .section-heading h2 {
+      color: white;
+    }
+
+    .references .section-intro {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .reference-box {
+      padding: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .reference-box li {
+      margin-bottom: 14px;
+    }
+
+    footer {
+      padding: 28px 7%;
+      background: #06111c;
+      color: rgba(255, 255, 255, 0.6);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive layout */
+
+    @media (max-width: 950px) {
+      .section-heading,
+      .grid-two,
+      .grid-three {
+        grid-template-columns: 1fr;
+      }
+
+      .snapshot {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .assessment-steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .technology-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .navbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero,
+      section {
+        padding-left: 5%;
+        padding-right: 5%;
+      }
+
+      .snapshot,
+      .assessment-steps,
+      .technology-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="brand">🏛 The Making of Modern Canada</div>
+
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#design">Design</a>
+      <a href="#galleries">Galleries</a>
+      <a href="#museum">Museum Project</a>
+      <a href="#assessment">Assessment</a>
+      <a href="#technology">Technology</a>
+      <a href="#resources">Resources</a>
+      <a href="#references">References</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-content">
+
+      <div class="eyebrow">
+        Grade 11 Contemporary Canadian Studies
+      </div>
+
+      <h1>The Making of Modern Canada</h1>
+
+      <p class="hero-subtitle">
+        A subject-based, Backward Design inquiry unit exploring how
+        industrialization, war, economic crisis, social movements,
+        constitutional change, and globalization transformed Canadian
+        society between 1880 and 2001.
+      </p>
+
+      <div class="hero-buttons">
+        <a class="button" href="#overview">Explore the Unit</a>
+        <a class="button secondary" href="#museum">
+          View the Virtual Museum Project
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+
+    <section class="overview" id="overview">
+      <div class="section-inner">
+
+        <div class="section-heading">
+          <div>
+            <div class="kicker">Unit Overview</div>
+            <h2>Canada in transition</h2>
+          </div>
+
+          <p class="section-intro">
+            This redesigned unit connects major historical developments
+            through one coherent inquiry into the making of modern Canada.
+          </p>
+        </div>
+
+        <div class="grid-two">
+
+          <div class="essential-question">
+            <p>
+              How did economic, social, and political changes transform
+              Canadian society between 1880 and 2001?
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Unit Focus</h3>
+
+            <p>
+              Students investigate how Canada evolved from a largely rural
+              and industrializing country into a modern, multicultural
+              democracy with an expanded welfare state and a changing role
+              in the global economy.
+            </p>
+
+            <p>
+              The unit combines teacher-guided lessons, primary-source
+              investigation, collaborative inquiry, a Virtual Museum, and
+              individual written assessment.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="snapshot">
+
+          <div class="snapshot-card">
+            <span class="snapshot-label">Course</span>
+            Grade 11 Contemporary Canadian Studies
+          </div>
+
+          <div class="snapshot-card">
+            <span class="snapshot-label">Duration</span>
+            Approximately 5–6 weeks
+          </div>
+
+          <div class="snapshot-card">
+            <span class="snapshot-label">Curriculum Design</span>
+            Subject-Based Curriculum
+          </div>
+
+          <div class="snapshot-card">
+            <span class="snapshot-label">Culminating Task</span>
+            Collaborative Virtual Museum
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="design" id="design">
+      <div class="section-inner">
+
+        <div class="section-heading">
+          <div>
+            <div class="kicker">Design Rationale</div>
+            <h2>Why redesign the unit?</h2>
+          </div>
+
+          <p class="section-intro">
+            The redesign preserves disciplinary knowledge while moving
+            students beyond isolated events and factual recall.
+          </p>
+        </div>
+
+        <div class="grid-three">
+
+          <article class="card">
+            <div class="icon">📚</div>
+            <h3>Subject-Based Curriculum</h3>
+            <p>
+              History remains the organizing discipline. Students build
+              historical knowledge while learning how historians use
+              evidence, identify patterns, evaluate interpretations, and
+              construct arguments.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🎯</div>
+            <h3>Backward Design</h3>
+            <p>
+              The desired understandings and final assessments are identified
+              first. Lessons, source analyses, and museum checkpoints are then
+              planned to prepare students for the Virtual Museum and final
+              written assessment.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🧭</div>
+            <h3>Inquiry and Multiple Perspectives</h3>
+            <p>
+              Students investigate historical questions using evidence from
+              Indigenous Peoples, women, workers, immigrants, Black
+              Canadians, Asian Canadians, and other communities frequently
+              underrepresented in traditional narratives.
+            </p>
+          </article>
+
+        </div>
+
+        <div class="grid-two" style="margin-top: 24px;">
+
+          <div class="card">
+            <h3>Learning Goals</h3>
+
+            <ul class="goals-list">
+              <li>
+                Explain how industrialization, war, economic crisis, social
+                reform, and globalization transformed Canada.
+              </li>
+
+              <li>
+                Analyze primary and secondary historical sources.
+              </li>
+
+              <li>
+                Evaluate how historical change affected communities
+                differently.
+              </li>
+
+              <li>
+                Construct evidence-based historical arguments.
+              </li>
+
+              <li>
+                Communicate historical understanding through written,
+                visual, and oral forms.
+              </li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Historical Thinking</h3>
+
+            <div class="thinking-tags">
+              <span>Historical Significance</span>
+              <span>Cause and Consequence</span>
+              <span>Continuity and Change</span>
+              <span>Historical Perspectives</span>
+              <span>Evidence</span>
+            </div>
+
+            <p style="margin-top: 20px;">
+              The year 2001 serves as a practical endpoint rather than a
+              strict historical boundary. The unit may be extended further
+              into the twenty-first century depending on time and curricular
+              priorities.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="galleries" id="galleries">
+      <div class="section-inner">
+
+        <div class="section-heading">
+          <div>
+            <div class="kicker">Learning Sequence</div>
+            <h2>Five museum galleries</h2>
+          </div>
+
+          <p class="section-intro">
+            Each gallery follows a recurring cycle of teacher instruction,
+            source analysis, discussion, artifact creation, and reflection.
+          </p>
+        </div>
+
+        <div class="gallery-grid">
+
+          <article class="gallery">
+            <div>
+              <div class="gallery-label">Gallery One</div>
+              <h3>Building an Industrial Nation</h3>
+              <div class="gallery-years">1880–1914</div>
+
+              <p>
+                How did industrialization and urbanization reshape Canada's
+                economy and everyday life?
+              </p>
+            </div>
+
+            <ul>
+              <li>Industrialization</li>
+              <li>Urbanization</li>
+              <li>Immigration and labour</li>
+              <li>Women's work</li>
+              <li>Chinese railway workers</li>
+              <li>Indigenous displacement</li>
+            </ul>
+          </article>
+
+          <article class="gallery">
+            <div>
+              <div class="gallery-label">Gallery Two</div>
+              <h3>Canada at War</h3>
+              <div class="gallery-years">1914–1918</div>
+
+              <p>
+                How did the First World War transform Canadian society and
+                national identity?
+              </p>
+            </div>
+
+            <ul>
+              <li>Military service</li>
+              <li>Conscription</li>
+              <li>Women's suffrage</li>
+              <li>Black and Indigenous soldiers</li>
+              <li>The home front</li>
+              <li>Expanding government</li>
+            </ul>
+          </article>
+
+          <article class="gallery">
+            <div>
+              <div class="gallery-label">Gallery Three</div>
+              <h3>Crisis and Recovery</h3>
+              <div class="gallery-years">1919–1945</div>
+
+              <p>
+                How did economic crisis and global conflict redefine the role
+                of government?
+              </p>
+            </div>
+
+            <ul>
+              <li>Roaring Twenties</li>
+              <li>Great Depression</li>
+              <li>Relief camps</li>
+              <li>Second World War</li>
+              <li>Japanese Canadian internment</li>
+              <li>Refugees and wartime mobilization</li>
+            </ul>
+          </article>
+
+          <article class="gallery">
+            <div>
+              <div class="gallery-label">Gallery Four</div>
+              <h3>Building Modern Canada</h3>
+              <div class="gallery-years">1945–1982</div>
+
+              <p>
+                How did post-war prosperity reshape Canadian society?
+              </p>
+            </div>
+
+            <ul>
+              <li>Welfare state</li>
+              <li>Consumer society</li>
+              <li>Baby boom and suburbs</li>
+              <li>Medicare</li>
+              <li>Quiet Revolution</li>
+              <li>Multiculturalism and activism</li>
+            </ul>
+          </article>
+
+          <article class="gallery">
+            <div>
+              <div class="gallery-label">Gallery Five</div>
+              <h3>Canada in a Changing World</h3>
+              <div class="gallery-years">1982–2001</div>
+
+              <p>
+                How did Canada continue to redefine its identity in an
+                increasingly interconnected world?
+              </p>
+            </div>
+
+            <ul>
+              <li>Charter of Rights and Freedoms</li>
+              <li>Constitutional debates</li>
+              <li>Indigenous rights</li>
+              <li>Immigration and globalization</li>
+              <li>Technology</li>
+              <li>2001 as a transition point</li>
+            </ul>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="museum-project" id="museum">
+      <div class="section-inner">
+
+        <div class="section-heading">
+          <div>
+            <div class="kicker">Culminating Project</div>
+            <h2>The Virtual Museum</h2>
+          </div>
+
+          <p class="section-intro">
+            Students become curators and communicate a historical
+            interpretation to an authentic classroom audience.
+          </p>
+        </div>
+
+        <div class="grid-two">
+
+          <div class="artifact-box">
+            <div class="artifact-frame"></div>
+
+            <h3>Sample Exhibit Entry</h3>
+
+            <p>
+              Each artifact is accompanied by an exhibit label explaining
+              what the source reveals, why it is historically significant,
+              which historical thinking concept it illustrates, and how it
+              contributes to understanding Canada's transformation.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Student Task</h3>
+
+            <p>
+              Working collaboratively, students design a digital exhibition
+              titled <strong>The Making of Modern Canada</strong>. Each group
+              creates a complete museum organized around the five galleries
+              of the unit.
+            </p>
+
+            <div class="project-process">
+
+              <div class="process-step">
+                <div class="process-number">1</div>
+                <div>
+                  <strong>Research</strong><br>
+                  Investigate the historical context using teacher lessons,
+                  primary sources, and reliable secondary sources.
+                </div>
+              </div>
+
+              <div class="process-step">
+                <div class="process-number">2</div>
+                <div>
+                  <strong>Select artifacts</strong><br>
+                  Choose photographs, documents, maps, political cartoons,
+                  statistics, newspaper articles, or multimedia.
+                </div>
+              </div>
+
+              <div class="process-step">
+                <div class="process-number">3</div>
+                <div>
+                  <strong>Interpret evidence</strong><br>
+                  Write exhibit labels that explain significance, change,
+                  consequence, and perspective.
+                </div>
+              </div>
+
+              <div class="process-step">
+                <div class="process-number">4</div>
+                <div>
+                  <strong>Present the museum</strong><br>
+                  Share the completed museum with classmates, explain
+                  curatorial decisions, and answer questions.
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="assessment" id="assessment">
+      <div class="section-inner">
+
+        <div class="section-heading">
+          <div>
+            <div class="kicker">Assessment Plan</div>
+            <h2>Multiple forms of evidence</h2>
+          </div>
+
+          <p class="section-intro">
+            The unit collects evidence through observations, conversations,
+            student products, and individual written assessment.
+          </p>
+        </div>
+
+        <div class="assessment-steps">
+
+          <div class="assessment-step">
+            <span class="assessment-icon">👀</span>
+            <strong>Teacher observations</strong>
+          </div>
+
+          <div class="assessment-step">
+            <span class="assessment-icon">💬</span>
+            <strong>Discussions and conferences</strong>
+          </div>
+
+          <div class="assessment-step">
+            <span class="assessment-icon">📄</span>
+            <strong>Primary-source analysis</strong>
+          </div>
+
+          <div class="assessment-step">
+            <span class="assessment-icon">🏛</span>
+            <strong>Museum checkpoints</strong>
+          </div>
+
+          <div class="assessment-step">
+            <span class="assessment-icon">🤝</span>
+            <strong>Peer feedback and presentation</strong>
+          </div>
+
+        </div>
+
+        <div class="grid-two">
+
+          <article class="card pathway">
+            <h3>Pre-IB Pathway</h3>
+
+            <p>
+              Students complete the collaborative Virtual Museum and an
+              individual historical essay. The essay develops the ability to
+              synthesize evidence and construct a sustained argument in
+              preparation for future IB-style assessments.
+            </p>
+
+            <div class="essay-question">
+              To what extent did economic, social, and political changes
+              between 1880 and 2001 transform Canadian society and the role
+              of government?
+            </div>
+          </article>
+
+          <article class="card pathway academic">
+            <h3>Academic Pathway</h3>
+
+            <p>
+              Students complete the collaborative Virtual Museum and a
+              traditional written unit test.
+            </p>
+
+            <p>
+              The test includes multiple-choice questions, source analysis,
+              and short-answer open questions. Both pathways assess the same
+              historical understandings through different formats.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="technology" id="technology">
+      <div class="section-inner">
+
+        <div class="section-heading">
+          <div>
+            <div class="kicker">Technology Integration</div>
+            <h2>Purposeful, not decorative</h2>
+          </div>
+
+          <p class="section-intro">
+            Technology enhances access, collaboration, historical inquiry,
+            communication, and assessment without replacing teacher
+            instruction or historical thinking.
+          </p>
+        </div>
+
+        <div class="technology-grid">
+
+          <article class="technology-card">
+            <span>🖥️</span>
+            <h3>Google Slides</h3>
+            <p>
+              Supports teacher-guided lessons using photographs, maps,
+              videos, and structured historical explanations.
+            </p>
+          </article>
+
+          <article class="technology-card">
+            <span>🗄️</span>
+            <h3>Digital Archives</h3>
+            <p>
+              Provides access to authentic primary sources from Library and
+              Archives Canada and other historical collections.
+            </p>
+          </article>
+
+          <article class="technology-card">
+            <span>🏛️</span>
+            <h3>Google Sites</h3>
+            <p>
+              Provides the platform for the collaborative Virtual Museum.
+            </p>
+          </article>
+
+          <article class="technology-card">
+            <span>📝</span>
+            <h3>Google Docs</h3>
+            <p>
+              Supports planning, collaboration, source notes, drafting, and
+              teacher feedback.
+            </p>
+          </article>
+
+          <article class="technology-card">
+            <span>🧱</span>
+            <h3>Padlet</h3>
+            <p>
+              Supports peer feedback, sharing, and a digital gallery walk.
+            </p>
+          </article>
+
+          <article class="technology-card">
+            <span>🎨</span>
+            <h3>Canva</h3>
+            <p>
+              Supports visual communication and the creation of museum-style
+              exhibit materials.
+            </p>
+          </article>
+
+        </div>
+
+        <div class="grid-two" style="margin-top: 22px;">
+
+          <div class="card">
+            <h3>Universal Design for Learning</h3>
+
+            <p>
+              Students access content through photographs, maps, videos,
+              political cartoons, teacher presentations, discussion, and
+              primary documents. They communicate learning through writing,
+              visual design, oral presentation, and collaborative digital
+              exhibits.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Responsible Use of Artificial Intelligence</h3>
+
+            <p>
+              AI may support brainstorming, question generation, or revision,
+              but it does not replace source analysis, exhibit writing, or
+              historical argumentation. Students must verify claims using
+              historical evidence.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="resources" id="resources">
+      <div class="section-inner">
+
+        <div class="section-heading">
+          <div>
+            <div class="kicker">Teacher Resources</div>
+            <h2>Materials for implementation</h2>
+          </div>
+
+          <p class="section-intro">
+            Replace the placeholder links below with links to your Google
+            Slides, rubrics, templates, and student resources.
+          </p>
+        </div>
+
+        <div class="grid-three">
+
+          <article class="card resource-card">
+            <div class="icon">🖥</div>
+            <h3>Teacher Presentations</h3>
+            <p>
+              Industrialization, the First World War, the 1920s and Great
+              Depression, the Second World War, post-war Canada, and
+              multiculturalism.
+            </p>
+            <a href="#">Add presentation links →</a>
+          </article>
+
+          <article class="card resource-card">
+            <div class="icon">📜</div>
+            <h3>Student Templates</h3>
+            <p>
+              Primary-source analysis sheet, museum planning organizer,
+              exhibit label template, and peer-feedback form.
+            </p>
+            <a href="#">Add template links →</a>
+          </article>
+
+          <article class="card resource-card">
+            <div class="icon">📋</div>
+            <h3>Assessment Tools</h3>
+            <p>
+              Virtual Museum rubric, Pre-IB historical essay rubric, academic
+              unit test outline, and project checkpoint schedule.
+            </p>
+            <a href="#">Add assessment links →</a>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="references" id="references">
+      <div class="section-inner">
+
+        <div class="section-heading">
+          <div>
+            <div class="kicker">References</div>
+            <h2>Frameworks informing the design</h2>
+          </div>
+
+          <p class="section-intro">
+            The theoretical foundations are embedded in the unit design and
+            documented here in APA format.
+          </p>
+        </div>
+
+        <div class="reference-box">
+          <ol>
+            <li>
+              CAST. (2024).
+              <em>Universal Design for Learning Guidelines version 3.0</em>.
+              https://udlguidelines.cast.org
+            </li>
+
+            <li>
+              Falloon, G. (2020). From digital literacy to digital
+              competence: The teacher digital competency framework.
+              <em>
+                Educational Technology Research and Development, 68
+              </em>(5), 2449–2472.
+            </li>
+
+            <li>
+              Mishra, P., &amp; Koehler, M. J. (2006). Technological
+              pedagogical content knowledge: A framework for teacher
+              knowledge.
+              <em>Teachers College Record, 108</em>(6), 1017–1054.
+            </li>
+
+            <li>
+              Schiro, M. S. (2013).
+              <em>
+                Curriculum theory: Conflicting visions and enduring concerns
+              </em>
+              (2nd ed.). SAGE Publications.
+            </li>
+
+            <li>
+              Wiggins, G., &amp; McTighe, J. (2005).
+              <em>Understanding by design</em> (Expanded 2nd ed.). ASCD.
+            </li>
+          </ol>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    The Making of Modern Canada · Grade 11 Contemporary Canadian Studies
+  </footer>
+
+</body>
+</html>
